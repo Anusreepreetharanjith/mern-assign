@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+    
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="app.js"></script> <!--to connect to app.js-->
+    <title>Document</title>
+
+    <style>
+        fieldset {
+            width: 60%;
+            margin: 20px;
+        }
+    </style>
+    <script>
+        let myList=[];
+        var a;
+        
+        function addtoList(){
+            var result="";
+            a=Number(document.getElementById("number").value);
+            myList.push(a);
+            myList.forEach(function(item){
+                result+="<li>"+item+""; // result = "<li> 2 <li> 3 <li> 4"
+            });
+            document.getElementById("numberList").innerHTML = result;
+            document.getElementById('number').value = ''; // to clear text box after adding
+        }
+
+        function clearDisplay(){
+            //document.getElementById('number').value = '';
+        }
+
+        function Sum(){
+            var sum = myList.reduce(function(a, b){
+            return a + b;
+            }, 0);
+            document.getElementById("console").innerHTML = " Sum is "+sum;
+        }
+
+        function Average(){
+            var sum = myList.reduce(function(a, b){
+            return a + b;}, 0);
+            var len=myList.length;
+            var avg=sum/len;
+            document.getElementById("console").innerHTML = "Average is "+avg;
+        }
+
+        function resetSiteTitle(){
+        location.reload();
+        }
+        function findMin(){
+            
+        }
+
+        function refresh(){
+            document.getElementById('numberList').innerHTML="";
+             document.getElementById('console').innerHTML="";
+        }
+
+    </script>
+
+   
+
+</head>
+
+
+<body>
+    <fieldset>
+        <legend>Toolbar</legend>
+        <div>
+            Number
+            <input type='text' id='number'/>
+            <input type='button' value="Add to List" onclick="addtoList()"/>
+            <input type='button' value="Clear Display" onclick="refresh()"/>
+            <input type='button' value="Reset" onclick="resetSiteTitle()"/>
+            <br/>
+            <input type='button' value="Sum" onclick="Sum()"/>
+            <input type='button' value="Average" onclick="Average()"/>
+            <input type='button' value="Find Min" onclick="findMin()"/>
+        </div>
+    </fieldset>
+    <hr/>
+
+    <fieldset>
+        <legend>Console</legend>
+
+        <div id='console'>
+
+        </div>
+
+    </fieldset>
+
+    <fieldset>
+        <legend>Number List</legend>
+
+        <ul id='numberList'>
+            
+
+        </ul>
+
+        <input type='button' value='refresh list'  />
+    </fieldset>        
+            
+</body>
+</html>
