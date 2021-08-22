@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <h1 style="color: royalblue;">Add Book</h1>
+ 
+    
+</head>
+<body>
+    
+   <p>Title : <input type='text' id='key' placeholder='enter the book title' /></p>
+   <p>Author:<input type='text' id='key1' placeholder='enter the information' /></p>
+   <p>Price : <input type='text' id='key2' placeholder='enter the information' /></p>
+   <p>Cover Page :<input type='text' id='value' placeholder='enter the information'/> </p>
+
+    <input type="button" onClick="save()" value='Save' />
+    <input type="button" onClick="load()" value='Find' /> 
+    <p id="status"></p>
+
+    <script>
+        const keyBox=document.getElementById('key');
+        const keyBox1=document.getElementById('key1');
+        const keyBox2=document.getElementById('key2');
+       
+        const valueBox=document.getElementById('value');
+        const status=document.getElementById('status');
+
+        function save(){
+            const key=keyBox.value;
+            const key1=keyBox1.value;
+            const key2=keyBox2.value;
+           
+            const value=valueBox.value;
+
+            localStorage.setItem(key,key1,key2,value);
+            keyBox.value='';
+            keyBox1.value='';
+            keyBox2.value='';
+            
+            valueBox.value='';
+            status.innerHTML=`key ${key} saved`;
+         
+        }
+        function load(){
+            const key=keyBox.value;
+            const key1=keyBox1.value;
+            const key2=keyBox2.value;
+            
+            const value=localStorage.getItem(key);
+            const value1=localStorage.getItem(key1);
+            const value2=localStorage.getItem(key2);
+           
+            if(value){
+                valueBox.value=value;
+                status.innerHTML=`done`;
+            } else{
+                status.innerHTML=`key ${key} not found`;
+                valueBox.value='';
+            }
+        }
+    </script>
+</body>
+</html>
