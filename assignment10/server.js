@@ -6,7 +6,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Route to Homepage
 app.get('/', (request, response) => {
-  response.sendFile(__dirname + '/static/index.html');
+  response.sendFile(__dirname + '/static/login.html');
 });
 
 // Route to Login Page
