@@ -1,8 +1,8 @@
 const express = require('express');
-const { UserModels } = require('../models/user');
+const { UserModel } = require('../models/user');
 
 
-const getRouter = () => {
+const getUsRouter = () => {
 
     // console.log('setting up the routes');
     let router = express.Router();
@@ -18,7 +18,7 @@ const getRouter = () => {
         .post(async (request, response) => {
             try {
                 let bookData = request.body;
-                let book = new BookModel(bookData);
+                let book = new UserModel(bookData);
                 let result = await book.save();
                 response.status(201).json(result);
             } catch (err) {
@@ -29,4 +29,4 @@ const getRouter = () => {
         return router;
     } 
 
-module.exports = getRouter;
+module.exports = getUsRouter;
