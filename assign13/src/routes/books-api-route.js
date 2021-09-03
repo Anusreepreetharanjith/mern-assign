@@ -1,6 +1,7 @@
 const express=require('express');
 const {BookService}=require('../services/book-service');
 const {handleRequest}=require('../utils/express-utils');
+const reviewService =require('../services/review-service');
 
 
 
@@ -34,7 +35,11 @@ const getRouter= ()=>{
     .put(handleRequest(service.updateBook))
     .delete(handleRequest(service.removeBook));
 
-
+    router 
+    .route('/:id/reviews')
+    .get(handleRequest(reviewService.getAllReviews))
+    .put(handleRequest(reviewService.addReview))
+    
  
   router.get('/by/:author',handleRequest(service.getBooksByAuthor));
 
