@@ -1,0 +1,50 @@
+body {
+    margin: 10;
+  }
+  
+  .image-grid {
+    --gap: 16px;
+    --num-cols: 3;
+    --row-height: 320px;
+
+    position: absolute;
+   
+   
+  
+  
+    
+  
+  
+  
+    padding: var(--gap);
+  
+    display: grid;
+    grid-template-columns: repeat(var(--num-cols), 1fr);
+    grid-auto-rows: var(--row-height);
+    gap: var(--gap);
+  }
+  
+
+ .mained {
+     
+     width: 295px;
+     box-shadow: -2px -2px 2px gray;
+     height:245px;
+     
+ }
+  
+ .red{
+    margin-top :650px;
+    margin-left: 500px;
+   
+}
+ 
+  
+  /* Anything udner 1024px */
+  @media screen and (max-width: 1024px) {
+    .image-grid {
+      --num-cols: 2;
+      --row-height: 200px;
+    }
+  }
+  
