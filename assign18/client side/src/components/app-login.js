@@ -6,7 +6,7 @@ const App = () => {
         <div> 
             <h2>Login </h2>
            
-            <form className = "red">
+            <form className = "red1">
   <div class="form-group">
     <label for="username" >Username</label>
     <input type="username" class="form-control" id="username"  placeholder="Enter username"/>

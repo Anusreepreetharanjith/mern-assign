@@ -13,6 +13,11 @@ class AuthorController {
         //do this for all methods
     }
 
+    async getAllAuthors(request,response){
+        const authors= await service.getAllAuthors();
+        response.json(authors);
+    }
+
 
     async addAuthor(request,response){
         try{

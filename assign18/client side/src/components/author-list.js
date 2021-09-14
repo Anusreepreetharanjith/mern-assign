@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Loading from './loading';
 import "./author-list.css"
-
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { faTrash, faInfo, faEdit, } from '@fortawesome/free-solid-svg-icons'
 import { AuthorService } from '../services/author-service';
 
 
@@ -30,18 +31,25 @@ const Component = () => {
                     {
                         authors.map((author) => (
                             <div key={author._id}>
-                                <div><img className="mained"  src={author.photo} /></div>
+                                <div><img className="mained" src={author.photo} /></div>
                                 <div class="desc"> {author.name}</div>
-                               
+                                <div>
+
+                                    <Link  to={`/author/details/${author._id}`} className='btn  btn-primary'><FontAwesomeIcon icon={faInfo} /> </Link>
+                                    <Link  to= {`/author/edit/${author._id}`}   className='btn  btn-primary '><FontAwesomeIcon icon={faEdit} /></Link>
+
+                                </div>
+
+
 
                             </div>
                         ))
                     }
                 </div>
 
-                <button className="red" >Edit</button>
+             
             </body>
-            
+
 
         </div>);
 }

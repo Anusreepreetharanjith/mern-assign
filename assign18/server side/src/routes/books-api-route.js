@@ -34,17 +34,6 @@ const getRouter= ()=>{
     .put(handleRequest(service.updateBook))
     .delete(handleRequest(service.removeBook));
 
-    router 
-    .route('/:id/reviews')
-    
-    .post(handleRequest(service.addReview))
-    
-
-
-
-
-
-
 
  
   router.get('/by/:author',handleRequest(service.getBooksByAuthor));

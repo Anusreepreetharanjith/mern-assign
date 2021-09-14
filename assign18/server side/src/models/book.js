@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 
-
 const review=mongoose.Schema({
     name:String,
     comment:String,
@@ -10,14 +9,14 @@ const review=mongoose.Schema({
 
 const books = mongoose.Schema({
    
-    title: String,
+    title: {type:String, required:true},
     isbn:{
         type:String,
         required:true
     },
     author:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"Author",
+        type:String,
+        required:true,
     },
     price:{
         type:Number,

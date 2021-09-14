@@ -68,16 +68,6 @@ class  BookService{
         return await Book.find({tag:/tag/i})
     }
 
-    async addReview(isbn,body)
-    {
-        let book=await this.getBookByIsbn(isbn);
-        Book.review.push(review);
-        await book.save();
-    }
-
-    
-
-
     async search(term){
         const a= new RegExp(term,'i');
         return await Book.find( { $text: { $search: a } })

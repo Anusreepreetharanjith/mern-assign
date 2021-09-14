@@ -7,6 +7,7 @@ import {withRouter} from 'react-router-dom';
 const Component=(props)=>{
 
     //console.log(props);
+    const [errors,setErrors]= useState(null, props);
 
     const book={
         isbn:'',
@@ -17,15 +18,23 @@ const Component=(props)=>{
         cover:''
     };
 
-    const handleSave=(book)=>{
-        BookService.instance.addBook(book);
-        props.history.push('/book/list'); //goto /book/list
+    const handleSave=async (book)=>{
+       
+        const result=await BookService.instance.addBook(book);
+       
+        if(result.success)
+            props.history.push('/book/list'); //goto /book/list
+        else{
+            const _errors= result.error.response.data.error.errors;
+            setErrors(_errors);
+        }
     };
 
     return (
         <div>
             <h2>Add New Book</h2>
-            <BookEditor book={book} onSave={handleSave}/>
+            <BookEditor book={book} error={errors} onSave={BookService.instance.addBook}/>
+            
         </div>
     );
 };

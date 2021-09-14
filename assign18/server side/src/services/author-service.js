@@ -50,15 +50,23 @@ class AuthorService {
 
     }
 
-    async addAuthor({ body }) {
-        try {
-            let newAuthor = new Author(body);
+
+    async addAuthor({body}){
+        try{
+           
+
+            let authorData={...body};
+            console.log('bookData',authorData);
+            let newAuthor= new Author({...body});
+            console.log('new book',newAuthor);
             await newAuthor.save();
             return newAuthor;
-        } catch (error) {
-
-            throw new ServiceError(400, error.message, { error });
-
+        } catch(error) {
+            console.log('error saving', error);
+            if(error.constructor.name==="ServiceError")
+                throw error;
+            else
+                throw new ServiceError(400, error.message, {error});
         }
     }
 

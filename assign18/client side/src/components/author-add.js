@@ -6,6 +6,9 @@ import {withRouter} from 'react-router-dom';
 
 const Component=(props)=>{
 
+
+    const [errors,setErrors]= useState(null, props);
+
     const author={
         
         name:'',
@@ -14,15 +17,23 @@ const Component=(props)=>{
         biography: ''
     };
 
-    const handleSave=(author)=>{
-        AuthorService.instance.addAuthor(author);
-        props.history.push('/author/list'); 
+    const handleSave=async (author)=>{
+       
+        const result=await AuthorService.instance.addAuthor(author);
+       
+        if(result.success)
+            props.history.push('/author/list'); //goto /book/list
+        else{
+            const _errors= result.error.response.data.error.errors;
+            setErrors(_errors);
+        }
     };
+
 
     return (
         <div>
             <h2>Add New Author</h2>
-            <AuthorEditor author={author} onSave={handleSave}/>
+            <AuthorEditor author={author} error={errors} onSave={AuthorService.instance.addAuthor}/>
         </div>
     );
 };

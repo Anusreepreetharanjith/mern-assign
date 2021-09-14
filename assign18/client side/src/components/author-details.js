@@ -7,41 +7,38 @@ import NotFound from './not-found';
 
 const Component=(props)=>{
 
-    const [book,setBook]=useState(null,props,);
-    const isbn=props.match.params.isbn;
+    const [author,setAuthor]=useState(null,props,);
+    const _id=props.match.params._id;
     useEffect(()=>{
         
         //book will come after a delay
-        BookService.instance.getBookByIsbn(isbn).then((book)=>{
-            console.log(`got for ${isbn}: ${book}`);
-            setBook(book);
+        AuthorService.instance.getAuthorbyId(_id).then((author)=>{
+            console.log(`got for ${_id}: ${author}`);
+            setAuthor(author);
         });        
-    },[props.match.params.isbn]);
+    },[props.match.params._id]);
     
-    if(book===null){
-        return <Loading title={`searching for ${isbn}`} />
+    if(author===null){
+        return <Loading title={`searching for ${_id}`} />
     }
 
-    if(book===undefined){
-        return <NotFound message={`Sorry no book with isbn: ${isbn} present in our record`}/>
+    if(author===undefined){
+        return <NotFound message={`Sorry no book with id: ${_id} present in our record`}/>
     }
 
 
     return (
         <div className='book-details'>
-            <h2>{book.title}</h2>
-            <h3>by {book.author}</h3>
+            <h2>{author.name}</h2>
+          
             
             <div className='book-info'>
-                <img src={book.cover}/>
+                <img src={author.photo}/>
                 <div className='info'>
-                    <ul>
-                        <li>Price: {book.price}</li>
-                        <li>Rating: {book.rating}</li>
-                    </ul>
+                   <h3> About the Author </h3>
                     <hr/>
-                    <h4>Synopsis</h4>
-                    <p>{book.description}</p>
+                  
+                    <p>{author.biography}</p>
                     {/* <Expander title="Synopsis" content={book.description} short={200} /> */}
                 </div>
             </div>

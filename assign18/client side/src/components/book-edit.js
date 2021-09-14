@@ -15,7 +15,7 @@ const Component=(props)=>{
     console.log('isbn',isbn);
 
     const history=useHistory();
-    
+    const [errors,setErrors]= useState(null, props);
     
     useEffect(()=>{
         BookService.instance.getBookByIsbn(isbn).then(setBook);
@@ -29,16 +29,21 @@ const Component=(props)=>{
         return <NotFound title="Book Not Found" message={`Missing isbn: ${isbn}`}/>
     }
 
-    const handleSave=(book)=>{
-        console.log('book',book);
-        BookService.instance.update(isbn,book);
-        history.push('/book/list'); //goto /book/list
+    const handleSave=async (book)=>{
+        
+        const result= await BookService.instance.update(isbn,book);
+        if(result.success)
+            history.push('/book/list'); //goto /book/list
+        else{
+            const _errors= result.error.response.data.error.errors;
+            setErrors(_errors);
+        }
     };
 
     return (
         <div>
             <h2>Edit Info</h2>
-            <BookEditor book={book} onSave={handleSave}/>
+            <BookEditor book={book} error={errors} onSave={BookService.instance.update}/>
         </div>
     );
 };
